@@ -6,7 +6,7 @@ async function init() {
     // Get api key
     // state.apiKey = await getApiKey() {
 
-    // }
+    // }    
 
     //
     console.log('API KEY:', state.apiKey)
