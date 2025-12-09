@@ -11,10 +11,8 @@ export async function getApiKey() {
 }
 
 // create tenat
-export async function createTenant() {
+export async function getApiTenant() {
     try {
-        // const bodyToSent = { name }
-        console.log(`URL: ${url}/tenants\napi key: ${state.apiKey}\nname: ${`test-user1${Date.now()}`}` )
         const response = await fetch(`${url}/tenants`, {
             method: 'POST',
             headers: {
@@ -26,14 +24,54 @@ export async function createTenant() {
                     name: `test-user1${Date.now()}`
                 })
             })  
-            console.log('this is the tenant', response)
+            const data = await response.json()
+            state.tenantId = data.id
+            state.tenantName = data.name
+            console.log('this is the tenantId',state.tenantId)
+            
+        }catch (error){
+            console.error(error.message)    
+    }
+}
+
+export async function getApiMenu() {
+    try {
+        const response = await fetch(`${url}/menu`, {
+            headers: {
+                'accept': 'application/json',
+                'x-zocom': state.apiKey,
+                'Content-Type': 'application/json'
+            },
+        })  
+            console.log('this is menu', response)
+            const data = await response.json()
+            console.log(data)
+            state.menu = data.items
+            console.log('this is state.menu', state.menu)
+
+        }catch (error){
+            console.error(error.message)    
+    }
+}
+
+export async function getApiOrderInfo() {
+    try {
+        const response = await fetch(`${url}/${state.tenantName}/orders`, {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'x-zocom': state.apiKey,
+                'Content-Type': 'application/json'
+            },    
+                body: JSON.stringify({
+                    items: getApiOrderInfo
+                })
+            })  
+            console.log('this is the order', response)
             const data = await response.json()
             console.log(data)
 
-            }catch (error){
+        }catch (error){
                 console.error(error.message)    
-            }
-            
-
-    // return await res.json() // return tenant info
+    }
 }

@@ -3,7 +3,9 @@
 export const state = {
     menu: [], 
     cart: [], 
-    order: '',
+    order: [], //[1, 5, 4]
+    receipt: [],
     apiKey: '',
-    tenant: '' 
+    tenantId: '',
+    tenantName: ''
 }
