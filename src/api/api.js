@@ -1,4 +1,4 @@
-import { state } from "./state.js"
+import { state } from "../state.js"
 // get API key
 const url ='https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com'
 export async function getApiKey() {

@@ -1,4 +1,4 @@
-import { getApiKey, createTenant} from './api.js'
+import { getApiKey, createTenant} from './api/api.js'
 import { state } from './state.js'
 
 async function init() {
