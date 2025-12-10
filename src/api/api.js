@@ -64,14 +64,37 @@ export async function getApiOrderInfo() {
                 'Content-Type': 'application/json'
             },    
                 body: JSON.stringify({
-                    items: getApiOrderInfo
+                    items: state.order
                 })
             })  
-            console.log('this is the order', response)
             const data = await response.json()
+            state.orderId = data.order.id
+            state.eta = data.order.eta
+            state.timestamp = data.order.timestamp
             console.log(data)
+            console.log('this is the orderId',state.orderId)
 
         }catch (error){
-                console.error(error.message)    
+            console.error(error.message)    
     }
 }
+export async function getApiRecipt() {
+    try {
+        const response = await fetch(`${url}/${state.tenantName}/receipts/${state.orderId}`, {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'x-zocom': state.apiKey,
+                'Content-Type': 'application/json'
+            },
+            })  
+            const data = await response.json()
+            console.log('this is the receipt',data)
+
+        }catch (error){
+            console.error(error.message)    
+    }
+}
+
+
+

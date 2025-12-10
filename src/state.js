@@ -3,9 +3,12 @@
 export const state = {
     menu: [], 
     cart: [], 
-    order: [], //[1, 5, 4]
+    order: [1, 2, 3,], //[1, 5, 4]
     receipt: [],
     apiKey: '',
     tenantId: '',
-    tenantName: ''
+    tenantName: '',
+    orderId: '',
+    eta: '',
+    timestamp: '',
 }
