@@ -11,4 +11,8 @@ export const state = {
     orderId: '',
     eta: '',
     timestamp: '',
+    totalPrice: ''
 }
+
+// lägg till totalPrice 
+// receipts hämta saker (items, id)

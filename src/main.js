@@ -3,7 +3,7 @@ import {
     getApiTenant, 
     getApiMenu,
     getApiOrderInfo,
-    getApiRecipt
+    getApiReceipt
 } from './api/api.js'
 import { state } from './state.js'
 
@@ -16,7 +16,7 @@ async function init() {
     await getApiTenant()
     await getApiMenu()
     await getApiOrderInfo()
-    await getApiRecipt()
+    await getApiReceipt()
 }
 
 init()

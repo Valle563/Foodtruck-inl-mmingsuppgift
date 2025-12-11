@@ -78,15 +78,14 @@ export async function getApiOrderInfo() {
             console.error(error.message)    
     }
 }
-export async function getApiRecipt() {
+export async function getApiReceipt() {
     try {
-        const response = await fetch(`${url}/${state.tenantName}/receipts/${state.orderId}`, {
-            method: 'POST',
+        const response = await fetch(`${url}/receipts/${state.orderId}`, {
             headers: {
                 'accept': 'application/json',
                 'x-zocom': state.apiKey,
                 'Content-Type': 'application/json'
-            },
+                }
             })  
             const data = await response.json()
             console.log('this is the receipt',data)
