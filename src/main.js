@@ -2,11 +2,9 @@ import {
     getApiKey, 
     getApiTenant, 
     getApiMenu,
-    getApiOrderInfo,
-    getApiReceipt
 } from './api/api.js'
-import { state } from './state.js'
-
+import { state } from './state/state.js'
+import { displaySection } from './display.js'
 
 async function init() {
 
@@ -15,8 +13,8 @@ async function init() {
     await getApiKey()
     await getApiTenant()
     await getApiMenu()
-    await getApiOrderInfo()
-    await getApiReceipt()
+
+    displaySection('0')
 }
 
 init()

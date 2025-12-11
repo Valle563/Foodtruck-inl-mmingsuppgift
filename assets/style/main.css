@@ -5,3 +5,7 @@ Ljusgrå: #605858
 Vit:      #605858
 Röd:     #EB5757
 Font: Frutiger Next Bold */
+
+.remove-display {
+    display: none;
+}

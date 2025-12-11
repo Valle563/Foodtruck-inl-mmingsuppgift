@@ -1,4 +1,4 @@
-import { state } from "../state.js"
+import { state } from "../state/state.js"
 // get API key
 const url ='https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com'
 export async function getApiKey() {
@@ -88,8 +88,10 @@ export async function getApiReceipt() {
                 }
             })  
             const data = await response.json()
-            console.log('this is the receipt',data)
-
+            state.receiptId = data.receipt.id
+            state.receiptItems = data.receipt.items
+            state.receiptPrice = data.receipt.orderValue
+            console.log('this is the receiptId', state.receiptId, state.receiptItems, state.receiptPrice)
         }catch (error){
             console.error(error.message)    
     }
