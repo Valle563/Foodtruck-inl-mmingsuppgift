@@ -3,7 +3,7 @@
 export const state = {
     menu: [], 
     cart: [], 
-    order: [1, 2, 3,], //[1, 5, 4]
+    order: [1, 2, 3,], 
     receipt: [],
     apiKey: '',
     tenantId: '',
@@ -11,8 +11,9 @@ export const state = {
     orderId: '',
     eta: '',
     timestamp: '',
-    totalPrice: ''
+    totalPrice: '',
+    receiptId: '',
+    receiptItems: [],
+    receiptPrice: '',
 }
 
-// lägg till totalPrice 
-// receipts hämta saker (items, id)
