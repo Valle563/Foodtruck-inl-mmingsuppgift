@@ -2,7 +2,7 @@ import { state } from '../state/state.js'
 
 export function renderMenu() {
     const menuSection = document.querySelector('#menu')
-    menuSection.innerHTML = '' // Töm först
+    menuSection.innerHTML = '' 
     
     // Cart icon container
     const cartIconContainer = document.createElement('div')

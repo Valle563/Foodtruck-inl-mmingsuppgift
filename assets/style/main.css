@@ -6,8 +6,7 @@ Vit:      #605858
 Röd:     #EB5757
 Font: Frutiger Next Bold */
 
-/* delete later */
-/* * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -38,6 +37,5 @@ section {
     height: auto;
     z-index: 10;
     opacity: 0.5;
-    
-}  */
-/* delete later */
+     /* display: none;  */
+} 
