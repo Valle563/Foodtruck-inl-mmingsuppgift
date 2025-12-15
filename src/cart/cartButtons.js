@@ -4,8 +4,8 @@ import { renderCart } from './cart.js'
 import { getApiOrderInfo } from '../api/api.js'
 
 export function initCartButtons() {
-    // Back button
-    const backBtn = document.querySelector('#cart-back-btn')
+    // Back / menu button (top-right cart icon)
+    const backBtn = document.querySelector('#cart-btn')
     if (backBtn) {
         backBtn.addEventListener('click', () => {
             displaySection(0)

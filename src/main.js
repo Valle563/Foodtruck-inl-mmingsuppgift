@@ -5,7 +5,7 @@ import {
 } from './api/api.js'
 import { state } from './state/state.js'
 import { displaySection } from './display.js'
-import { renderMenu } from './menu/domMenu.js'
+import { renderMenu } from './menu/DOMmenu.js'
 import { initMenuButtons } from './menu/menuButtons.js'
 import { renderCart } from './cart/cart.js'
 import { initCartButtons } from './cart/cartButtons.js'
@@ -32,16 +32,22 @@ const observer = new MutationObserver(() => {
     const cart = document.querySelector('#cart')
     const waiting = document.querySelector('#waiting')
     const receipt = document.querySelector('#receipt')
-    
-    if (!menu.classList.contains('remove-display')) {
+
+    const menuVisible = menu && window.getComputedStyle(menu).display !== 'none'
+    const cartVisible = cart && window.getComputedStyle(cart).display !== 'none'
+    const waitingVisible = waiting && window.getComputedStyle(waiting).display !== 'none'
+    const receiptVisible = receipt && window.getComputedStyle(receipt).display !== 'none'
+
+    if (menuVisible) {
+        renderMenu()
         initMenuButtons()
-    } else if (!cart.classList.contains('remove-display')) {
+    } else if (cartVisible) {
         renderCart()
         initCartButtons()
-    } else if (!waiting.classList.contains('remove-display')) {
+    } else if (waitingVisible) {
         renderWaiting()
         initWaitingButtons()
-    } else if (!receipt.classList.contains('remove-display')) {
+    } else if (receiptVisible) {
         renderReceipt()
         initReceiptButtons()
     }
@@ -50,7 +56,7 @@ const observer = new MutationObserver(() => {
 observer.observe(document.body, { 
     attributes: true, 
     subtree: true, 
-    attributeFilter: ['class'] 
+    attributeFilter: ['style', 'class'] 
 })
 
 init()

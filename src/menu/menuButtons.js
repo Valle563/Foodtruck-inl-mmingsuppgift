@@ -1,5 +1,6 @@
 import { state } from '../state/state.js'
 import { displaySection } from '../display.js'
+import { renderMenu } from './DOMmenu.js'
 
 export function initMenuButtons() {
     // Cart button

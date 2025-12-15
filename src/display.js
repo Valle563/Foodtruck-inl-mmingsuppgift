@@ -4,17 +4,18 @@ const waiting = document.querySelector('#waiting')
 const receipt = document.querySelector('#receipt')
 
 const list = [menu, cart, waiting, receipt]
-function hideAllDisplays() {
 
-    list.forEach(item => { 
-        item.classList.add('remove-display')
+function hideAllDisplays() {
+    // explicitly set display to none so sections don't stack vertically
+    list.forEach(item => {
+        if (item) item.style.display = 'none'
     })
 }
 
 export function displaySection(input) {
     hideAllDisplays()
-
-    list[input].classList.remove('remove-display')
-
+    const idx = Number(input) || 0
+    const section = list[idx]
+    if (section) section.style.display = ''
 }
 

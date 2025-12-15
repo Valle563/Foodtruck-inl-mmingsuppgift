@@ -1,40 +1,191 @@
-/* Menu styles - exact look: green background, grey middle cards, hover darker */
+
 
 /* Ensure the main area fills the viewport (main colors are in main.css) */
-#menu{min-height:100vh;padding:26px 20px;display:block}
+#menu {
+    min-height: 100vh;
+    padding: 26px 20px;
+    display: block
+}
 
-.menu-title{color:var(--white);font-size:34px;margin:12px 0 18px 8px;letter-spacing:1px;text-transform:uppercase;font-weight:900;text-shadow:0 2px 0 rgba(0,0,0,0.08)}
+.menu-title{
+    color:var(--white);
+    font-size: 34px;
+    margin: 12px 0 18px 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.08)
+}
 
-.menu-container{max-width:420px;margin:0 auto;padding:6px}
+.menu-container{
+    max-width: 420px;
+    margin: 0 auto;
+    padding:6px
+}
 
 /* The large card that holds the wonton rows */
-.wontons-section{background:var(--dark);border-radius:10px;padding:6px 6px 10px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+.wontons-section{
+    background: var(--dark);
+    border-radius: 10px;
+    padding: 6px 6px 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12)
+}
 
 /* Each item appears as a lighter strip inside the dark card */
-.wonton-item{background:var(--light);border-radius:6px;margin:8px 4px;padding:10px 12px;overflow:hidden;transition:background-color 160ms ease, transform 120ms ease}
-.wonton-item:hover{background:rgba(0,0,0,0.10);filter:brightness(0.92);transform:translateY(-2px)}
+.wonton-item{ 
+    background:var(--light);
+    border-radius: 6px;
+    margin: 8px 4px;
+    padding: 10px 12px;
+    overflow: hidden;
+    transition: background-color 160ms ease, transform 120ms ease
+}
 
-.wonton-header{display:flex;align-items:center;justify-content:space-between;position:relative;padding-bottom:6px}
-.wonton-name{font-weight:800;color:var(--white);font-size:15px;z-index:2}
-.wonton-price{font-weight:800;color:var(--white);font-size:15px;z-index:2}
+.wonton-item:hover{ 
+    background: rgba(0,0,0,0.10);
+    filter: brightness(0.92);
+    transform:translateY(-2px)
+}
+
+.wonton-header{ 
+    display: 
+    flex; align-items: 
+    center; justify-content:
+    space-between; position:
+    relative; padding-bottom:6px
+}
+
+.wonton-name{ 
+    font-weight: 800;
+    color:var(--white);
+    font-size: 15px;
+    z-index: 2
+}
+
+.wonton-price{ 
+    font-weight: 800;
+    color: var(--white);
+    font-size: 15px;
+    z-index: 2
+}
 
 /* dotted leader between name and price */
-.wonton-header::before{content:'';position:absolute;left:12px;right:72px;top:50%;height:2px;transform:translateY(-50%);background-image:repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 2px, transparent 2px 8px);z-index:1}
+.wonton-header::before{
+    content:'';
+    position:absolute;
+    left: 12px; 
+    right: 72px;
+    top:50%; 
+    height: 2px;
+    transform: translateY(-50%);
+    background-image:repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 2px, transparent 2px 8px);
+    z-index:1
+}
 
-.wonton-ingredients{color:rgba(255,255,255,0.85);font-size:13px;margin:6px 0 0 0}
+.wonton-ingredients{ 
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    margin: 6px 0 0 0
+}
 
 /* Dips and drinks use similar card style but bigger spacing */
-.dips-section,.drinks-section{background:var(--dark);border-radius:10px;padding:12px;margin-top:12px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
-.section-title{color:var(--white);font-weight:900;font-size:16px;margin:0 0 10px 4px;padding:6px}
-.section-title .price{float:right;color:var(--white);font-weight:900}
-.dips-grid,.drinks-grid{display:flex;flex-wrap:wrap;gap:10px}
-.menu-btn{background:rgba(0,0,0,0.25);color:var(--white);border:none;padding:8px 12px;border-radius:8px;font-weight:800}
-.menu-btn:hover{background:rgba(0,0,0,0.38)}
+.dips-section,.drinks-section{
+    background: var(--dark);
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12)
+}
+
+.section-title{ 
+    color: var(--white); 
+    font-weight: 900;
+    font-size: 16px;
+    margin: 0 0 10px 4px;
+    padding:6px
+}
+
+.section-title .price{
+    float: right;
+    color: var(--white);
+    font-weight: 900
+}
+
+.dips-grid,.drinks-grid{ 
+    display: flex;
+    flex-wrap: wrap;
+    gap:10px
+}
+
+.menu-btn{
+    background: var(--light); /* match the inner strip gray */
+    color: var(--white);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 800;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+}
+
+.menu-btn:hover{
+    filter:brightness(0.92); /* subtle darken on hover */
+    transform: translateY(-3px) scale(1.01);
+}
+
+.menu-btn{ 
+    transition: transform 160ms ease, filter 160ms ease;
+    will-change: transform}
+
+/* Cart button animation and icon sizing */
+.cart-btn{ transition: transform 200ms ease, box-shadow 200ms ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center
+}
+
+.cart-btn:hover{
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.18)
+}
+
+.cart-btn:active{
+    transform: translateY(-2px) scale(0.99)
+}
+
+.cart-icon-img{
+    width: 28px;
+    height: 28px;
+    display:block
+}
+
 
 /* Cart button top-right styling (keeps visible) */
-.cart-icon-container{position:absolute;top:18px;right:18px}
-.cart-btn{width:56px;height:56px;border-radius:8px;border:none;background:var(--white);display:inline-flex;align-items:center;justify-content:center}
-.cart-badge{position:absolute;top:-6px;right:-6px;background:var(--red);color:var(--white);font-size:12px;padding:4px 6px;border-radius:999px}
+.cart-icon-container{
+    position: absolute;
+    top: 18px;
+    right: 18px
+}
+.cart-btn{
+    width: 56px; 
+    height: 56px;
+    border-radius: 8px;
+    border: none;
+    background: var(--white);
+    display: inline-flex;
+    align-items: center;
+    justify-content:center
+    
+}
+
+.cart-badge{
+    position: absolute;
+    right: -6px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 12px;
+    padding: 4px 6px;
+    border-radius:999px
+}
 
 /* Responsive down to 350px */
 @media (max-width:420px){

@@ -1,41 +1,20 @@
-/* colors for website */
-/* Grön:      #489078
-Mörkgrå: #353131
-Ljusgrå: #605858
-Vit:      #605858
-Röd:     #EB5757
-Font: Frutiger Next Bold */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: var(--main-font)
+:root{
+    --green: #489078;
+    --dark: #3b3b3b; 
+    --light: #6e6e6e; 
+    --total-box: #cfcfcf; 
+    --white: #ffffff;
+    --red: #EB5757;
+    --main-font: 'Frutiger', 'Frutiger Next', 'Helvetica Neue', Arial, sans-serif;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-.remove-display {
-    display: none;
-}
+/* Make the page background the project green */
+body{background:var(--green);font-family:var(--main-font);margin:0}
 
-section {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-}
+/* Utility to hide sections when not active */
+.remove-display{display:none}
 
-.delete-me {
-    position: absolute;
-    pointer-events: none;
-    top: 0;
-    left: 0;
-    width: 370px;
-    height: auto;
-    z-index: 10;
-    opacity: 0.5;
-     /* display: none;  */
-} 
+/* Ensure each section can fill the viewport when shown */
+section{width:100%;min-height:100vh}
+

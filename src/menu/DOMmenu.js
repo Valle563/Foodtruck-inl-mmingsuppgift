@@ -1,4 +1,5 @@
 import { state } from '../state/state.js'
+import { displaySection } from '../display.js'
 
 export function renderMenu() {
     const menuSection = document.querySelector('#menu')
@@ -11,11 +12,8 @@ export function renderMenu() {
     const cartBtn = document.createElement('button')
     cartBtn.className = 'cart-btn'
     cartBtn.id = 'cart-btn'
-    cartBtn.innerHTML = `
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M10.667 14.667h10.666v2.666H10.667v-2.666zm0-5.334h10.666v2.667H10.667V9.333zM8 24c-.733 0-1.361-.261-1.883-.783A2.565 2.565 0 015.334 21.333V10.667c0-.734.26-1.361.783-1.884A2.565 2.565 0 018 8h16c.733 0 1.361.261 1.883.783.522.523.783 1.15.783 1.884v10.666c0 .734-.261 1.361-.783 1.884A2.565 2.565 0 0124 24H8zm0-2.667h16V10.667H8v10.666z" fill="#353131"/>
-        </svg>
-    `
+    // use external SVG file for the cart icon so it's easier to update
+    cartBtn.innerHTML = `<img class="cart-icon-img" src="./assets/images/cart.svg" alt="cart">`
     
     if (state.cart.length > 0) {
         const badge = document.createElement('span')
@@ -23,6 +21,9 @@ export function renderMenu() {
         badge.textContent = state.cart.length
         cartBtn.appendChild(badge)
     }
+
+    // ensure cart button navigates to cart view
+    cartBtn.addEventListener('click', () => displaySection(1))
     
     cartIconContainer.appendChild(cartBtn)
     
