@@ -66,51 +66,58 @@ function createCartItem(item) {
     itemName.className = 'cart-item-name'
     itemName.textContent = item.name
 
+    const itemPrice = document.createElement('span')
+    itemPrice.className = 'cart-item-price'
+    itemPrice.textContent = `${item.price * item.quantity} SEK`
+
+    const titleRow = document.createElement('div')
+    titleRow.className = 'title-row'
+
+    const dottedLine = document.createElement('span')
+    dottedLine.className = 'dotted-line'
+
+    titleRow.appendChild(itemName)
+    titleRow.appendChild(dottedLine)
+    titleRow.appendChild(itemPrice)
+
     // Buttons go in the header right side (swap with price)
     const decreaseBtn = document.createElement('button')
     decreaseBtn.className = 'quantity-btn decrease-btn'
     decreaseBtn.dataset.id = item.id
-    decreaseBtn.setAttribute('aria-label', 'Minska antal')
     decreaseBtn.textContent = '−'
 
     const increaseBtn = document.createElement('button')
     increaseBtn.className = 'quantity-btn increase-btn'
     increaseBtn.dataset.id = item.id
-    increaseBtn.setAttribute('aria-label', 'Öka antal')
     increaseBtn.textContent = '+'
 
-    const headerRight = document.createElement('div')
-    headerRight.className = 'header-right'
-    // test
     const quantity = document.createElement('span')
     quantity.className = 'quantity'
     quantity.textContent = 
         item.quantity === 1
             ? `${item.quantity} styck`
             : `${item.quantity} stycken`
+    
+    const headerRight = document.createElement('div')
+    headerRight.className = 'header-right'
 
     headerRight.appendChild(decreaseBtn)
     headerRight.appendChild(quantity)
     headerRight.appendChild(increaseBtn)
 
-    itemHeader.appendChild(itemName)
+
+    itemHeader.appendChild(titleRow)
     itemHeader.appendChild(headerRight)
 
     // Cart item controls (price left, quantity text right)
     const itemControls = document.createElement('div')
     itemControls.className = 'cart-item-controls'
 
-    const itemPrice = document.createElement('span')
-    itemPrice.className = 'cart-item-price'
-    itemPrice.textContent = `${item.price * item.quantity} SEK`
+    // const itemPrice = document.createElement('span')
+    // itemPrice.className = 'cart-item-price'
+    // itemPrice.textContent = `${item.price * item.quantity} SEK`
 
-    itemControls.appendChild(itemPrice)
-    // const quantity = document.createElement('span')
-    // quantity.className = 'quantity'
-    // quantity.textContent = `${item.quantity} stycken`
-
-    // itemControls.appendChild(quantity)
-
+    // itemControls.appendChild(itemPrice)
     cartItem.appendChild(itemHeader)
     cartItem.appendChild(itemControls)
 
@@ -160,3 +167,4 @@ function createCartFooter() {
 
     return cartFooter
 }
+

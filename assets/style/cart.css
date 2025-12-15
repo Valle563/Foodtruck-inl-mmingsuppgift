@@ -1,4 +1,4 @@
-/* Cart page styles: light panel that sits on the green background */
+/* Cart page styles: light panel that sits on the green background
 
 /* Make cart section full-viewport and use a light background (remove green) */
 /* Make cart section a column so footer can sit at the bottom */
@@ -25,20 +25,20 @@
 .cart-items{
     width: 100%;
     max-width: 420px;
-    background: transparent;
-    border-radius: 0;
-    padding: 6px 12px;
+    /* background: transparent; */
+    /* border-radius: 0; */
+    /* padding: 6px 12px; */
     flex: 1;
     overflow-y: auto;
     padding-bottom: 120px
+    
 }
 
 .cart-item{
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     padding: 12px 0;
-    border-bottom: 1px dotted rgba(0,0,0,0.06)
 }
 
 .cart-item-header{
@@ -197,19 +197,63 @@
     border-radius:999px
 }
 
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dotted-line {
+    flex: 1;
+    border-bottom: 2px dotted rgba(0, 0, 0, 0.6);
+    height: 0;
+    transform: translateY(2px);
+}
+
+.cart-item-name,
+.cart-item-price {
+    white-space: nowrap;
+    font-weight: 800;
+}
 
 /* Header-right buttons alignment */
-.header-right{display:flex;gap:8px;align-items:center}
-.header-right .quantity-btn{width:36px;height:36px;border-radius:50%}
+.header-right{
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.header-right .quantity-btn{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%
+}
 
 /* Controls row: price on left, quantity on right */
-.cart-item-controls{display:flex;justify-content:space-between;align-items:center;padding-top:8px}
-.cart-item-price{font-weight:800;color:var(--dark)}
-.quantity{color:var(--dark);opacity:0.85}
-.cart-icon-img{width:28px;height:28px}
+.cart-item-controls{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding-top: 8px
+}
+
+.cart-item-price{
+    font-weight: 800;
+    color: var(--dark)
+}
+
+.quantity{
+    color: var(--dark);
+    opacity: 0.85
+}
+
+.cart-icon-img{
+    width: 28px;
+    height: 28px;
+}
 
 /* Small screens tweak */
 @media (max-width:420px){
 	.cart-items{padding:12px}
 	.order-btn{padding:14px}
-}
+} 

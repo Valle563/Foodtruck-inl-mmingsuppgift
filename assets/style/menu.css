@@ -3,7 +3,7 @@
 /* Ensure the main area fills the viewport (main colors are in main.css) */
 #menu {
     min-height: 100vh;
-    padding: 26px 20px;
+    /* padding: 26px 20px; */
     display: block
 }
 
