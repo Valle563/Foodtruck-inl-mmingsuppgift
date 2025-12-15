@@ -1,10 +1,9 @@
 import { state } from '../state/state.js'
 import { displaySection } from '../display.js'
-import { renderMenu } from 'domMenu.js'
 
 export function initMenuButtons() {
     // Cart button
-    const cartBtn = document.getElementById('cart-btn')
+    const cartBtn = document.querySelector('#cart-btn')
     if (cartBtn) {
         cartBtn.addEventListener('click', () => {
             displaySection(1)

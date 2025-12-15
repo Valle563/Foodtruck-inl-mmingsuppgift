@@ -5,7 +5,7 @@ import { getApiOrderInfo } from '../api/api.js'
 
 export function initCartButtons() {
     // Back button
-    const backBtn = document.getElementById('cart-back-btn')
+    const backBtn = document.querySelector('#cart-back-btn')
     if (backBtn) {
         backBtn.addEventListener('click', () => {
             displaySection(0)
@@ -13,7 +13,7 @@ export function initCartButtons() {
     }
     
     // Order button
-    const orderBtn = document.getElementById('order-btn')
+    const orderBtn = document.querySelector('#order-btn')
     if (orderBtn) {
         orderBtn.addEventListener('click', placeOrder)
     }

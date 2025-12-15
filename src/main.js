@@ -1,25 +1,3 @@
-// import { 
-//     getApiKey, 
-//     getApiTenant, 
-//     getApiMenu,
-// } from './api/api.js'
-// import { state } from './state/state.js'
-// import { displaySection } from './display.js'
-
-// async function init() {
-
-//     console.log('API KEY:', state.apiKey)
-
-//     await getApiKey()
-//     await getApiTenant()
-//     await getApiMenu()
-
-//     displaySection('0')
-// }
-
-// init()
-
-
 import { 
     getApiKey, 
     getApiTenant, 
@@ -27,7 +5,7 @@ import {
 } from './api/api.js'
 import { state } from './state/state.js'
 import { displaySection } from './display.js'
-import { renderMenu } from '.domMenu.js'
+import { renderMenu } from './menu/domMenu.js'
 import { initMenuButtons } from './menu/menuButtons.js'
 import { renderCart } from './cart/cart.js'
 import { initCartButtons } from './cart/cartButtons.js'
@@ -50,10 +28,10 @@ async function init() {
 
 // Listen for section changes and initialize buttons accordingly
 const observer = new MutationObserver(() => {
-    const menu = document.getElementById('menu')
-    const cart = document.getElementById('cart')
-    const waiting = document.getElementById('waiting')
-    const receipt = document.getElementById('receipt')
+    const menu = document.querySelector('#menu')
+    const cart = document.querySelector('#cart')
+    const waiting = document.querySelector('#waiting')
+    const receipt = document.querySelector('#receipt')
     
     if (!menu.classList.contains('remove-display')) {
         initMenuButtons()

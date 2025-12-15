@@ -1,0 +1,24 @@
+import { state } from '../state/state.js'
+import { displaySection } from '../display.js'
+import { getApiReceipt } from '../api/api.js'
+
+export function initWaitingButtons() {
+    // Receipt button
+    const receiptBtn = document.querySelector('#receipt-btn')
+    if (receiptBtn) {
+        receiptBtn.addEventListener('click', async () => {
+            await getApiReceipt()
+            displaySection(3)
+        })
+    }
+    
+    // New order button
+    const newOrderBtn = document.querySelector('#new-order-btn')
+    if (newOrderBtn) {
+        newOrderBtn.addEventListener('click', () => {
+            state.cart = []
+            state.order = []
+            displaySection(0)
+        })
+    }
+}
