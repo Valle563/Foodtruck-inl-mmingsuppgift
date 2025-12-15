@@ -81,7 +81,16 @@ function createCartItem(item) {
 
     const headerRight = document.createElement('div')
     headerRight.className = 'header-right'
+    // test
+    const quantity = document.createElement('span')
+    quantity.className = 'quantity'
+    quantity.textContent = 
+        item.quantity === 1
+            ? `${item.quantity} styck`
+            : `${item.quantity} stycken`
+
     headerRight.appendChild(decreaseBtn)
+    headerRight.appendChild(quantity)
     headerRight.appendChild(increaseBtn)
 
     itemHeader.appendChild(itemName)
@@ -95,12 +104,12 @@ function createCartItem(item) {
     itemPrice.className = 'cart-item-price'
     itemPrice.textContent = `${item.price * item.quantity} SEK`
 
-    const quantity = document.createElement('span')
-    quantity.className = 'quantity'
-    quantity.textContent = `${item.quantity} stycken`
-
     itemControls.appendChild(itemPrice)
-    itemControls.appendChild(quantity)
+    // const quantity = document.createElement('span')
+    // quantity.className = 'quantity'
+    // quantity.textContent = `${item.quantity} stycken`
+
+    // itemControls.appendChild(quantity)
 
     cartItem.appendChild(itemHeader)
     cartItem.appendChild(itemControls)

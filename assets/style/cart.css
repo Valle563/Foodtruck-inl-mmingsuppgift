@@ -133,7 +133,18 @@
     padding: 16px;
     border-radius: 8px;
     border: none;
-    font-weight: 900}
+    font-weight: 900
+}
+
+.order-btn:hover {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.18)
+}
+.order-btn:active{
+    transform: translateY(-2px) scale(0.99)
+}
+
+
 
 
 /* Cart button animation and icon sizing */
