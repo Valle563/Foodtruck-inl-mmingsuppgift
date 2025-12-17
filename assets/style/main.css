@@ -1,16 +1,26 @@
 
 :root{
     --green: #489078;
-    --dark: #3b3b3b; 
+    --dark: #292929; 
     --light: #6e6e6e; 
     --total-box: #cfcfcf; 
     --white: #ffffff;
     --red: #EB5757;
+    --brown: #605858;
     --main-font: 'Frutiger', 'Frutiger Next', 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Make the page background the project green */
-body{background:var(--green);font-family:var(--main-font);margin:0}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
 
 /* Utility to hide sections when not active */
 .remove-display{display:none}

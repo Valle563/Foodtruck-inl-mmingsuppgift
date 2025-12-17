@@ -2,6 +2,12 @@
 
 /* Make cart section full-viewport and use a light background (remove green) */
 /* Make cart section a column so footer can sit at the bottom */
+
+* {
+    font-family: var(--main-font);
+}
+
+
 #cart{ 
     min-height: 100vh;
     display: flex;
@@ -10,7 +16,8 @@
     justify-content: flex-start;
     position: relative; 
     background: var(--white);
-    padding-top: 64px
+    padding-top: 90px
+
 }
 
 .cart-header{
@@ -21,49 +28,51 @@
     padding-bottom:6px
 }
 
-/* Rows sit directly on the white page (no inner panel) */
-.cart-items{
-    width: 100%;
-    max-width: 420px;
-    /* background: transparent; */
-    /* border-radius: 0; */
-    /* padding: 6px 12px; */
-    flex: 1;
-    overflow-y: auto;
-    padding-bottom: 120px
-    
-}
 
 .cart-item{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
+    flex-direction: column;
+    border-bottom: 1px solid gray;
 }
 
-.cart-item-header{
+.title-row {
     display: flex;
-    flex-direction: column;
-    gap: 6px
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 300px;
 }
 
 .cart-item-name{
     font-weight: 800;
     color: var(--dark);
-    letter-spacing: 0.4px
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    font-weight: 800;
+}
+
+.dotted-line {
+    flex: 1;
+    background: repeating-linear-gradient(to right, black 0px 2px, transparent 2px 4px);
+    height: 2px;
+    margin-top: 15px;
 }
 
 .cart-item-price{
     font-weight: 800;
-    color: var(--dark)
+    color: var(--dark);
+    white-space: nowrap;
+    font-weight: 800;
 }
 
 .cart-item-controls{
+    /* justify-content: flex-start; */
+    /* gap: 8px; */
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-start
-}
+    position: relative;
+    gap: 74px;
+    margin-bottom: 10px;
+} 
 .quantity-btn{
     width: 28px;
     height: 28px;
@@ -86,10 +95,13 @@
     transform: translateY(-2px) scale(0.99)
 }
 
-
 .quantity{
     color: var(--dark);
-    font-size: 13px
+    font-size: 13px;
+    margin: 0 1em;
+    position: absolute;
+    top: 5px;
+    left: 30px;
 }
 
 /* Pin the footer so total + order button remain visible */
@@ -108,7 +120,7 @@
 
 .total-section{
     background: var(--total-box);
-    padding: 12px;
+    padding: 8px;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
@@ -118,7 +130,18 @@
 .total-label{
     font-weight: 800;
     color: var(--dark);
-    font-size: 13px
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    p{
+        font-weight: 400;
+    }
+
+    h3, h2, p{
+        margin: 0;
+    }
 }
 
 .total-price{
@@ -145,115 +168,21 @@
 }
 
 
-
-
 /* Cart button animation and icon sizing */
 .cart-btn{ 
     transition: transform 200ms ease, box-shadow 200ms ease;
     display: inline-flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+
 }
 
 .cart-btn:hover{
     transform: translateY(-6px) scale(1.04);
-    box-shadow: 0 14px 32px rgba(0,0,0,0.18)
+    box-shadow: 0 14px 32px rgba(0,0,0,0.18);
 }
 
 .cart-btn:active{
-    transform: translateY(-2px) scale(0.99)
+    transform: translateY(-2px) scale(0.99),
 }
 
-.cart-icon-img{
-    width: 28px;
-    height: 28px;
-    display:block
-}
-
-.cart-icon-container{
-    position: absolute;
-    top: 18px;
-    right: 18px
-}
-.cart-btn{
-    width: 56px; 
-    height: 56px;
-    border-radius: 8px;
-    border: none;
-    background: var(--white);
-    display: inline-flex;
-    align-items: center;
-    justify-content:center
-}
-
-.cart-badge{
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    background: var(--red);
-    color: var(--white);
-    font-size: 12px;
-    padding: 4px 6px;
-    border-radius:999px
-}
-
-.title-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.dotted-line {
-    flex: 1;
-    border-bottom: 2px dotted rgba(0, 0, 0, 0.6);
-    height: 0;
-    transform: translateY(2px);
-}
-
-.cart-item-name,
-.cart-item-price {
-    white-space: nowrap;
-    font-weight: 800;
-}
-
-/* Header-right buttons alignment */
-.header-right{
-    display: flex;
-    gap: 8px;
-    align-items: center
-}
-
-.header-right .quantity-btn{
-    width: 36px;
-    height: 36px;
-    border-radius: 50%
-}
-
-/* Controls row: price on left, quantity on right */
-.cart-item-controls{
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    padding-top: 8px
-}
-
-.cart-item-price{
-    font-weight: 800;
-    color: var(--dark)
-}
-
-.quantity{
-    color: var(--dark);
-    opacity: 0.85
-}
-
-.cart-icon-img{
-    width: 28px;
-    height: 28px;
-}
-
-/* Small screens tweak */
-@media (max-width:420px){
-	.cart-items{padding:12px}
-	.order-btn{padding:14px}
-} 

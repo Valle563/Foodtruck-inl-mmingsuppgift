@@ -69,8 +69,8 @@ export async function getApiOrderInfo() {
             })  
             const data = await response.json()
             state.orderId = data.order.id
-            state.eta = data.order.eta
-            state.timestamp = data.order.timestamp
+            state.eta = Date.parse(data.order.eta)
+            state.timestamp = Date.parse(data.order.timestamp)
             console.log(data)
             console.log('this is the orderId',state.orderId)
 
@@ -90,12 +90,11 @@ export async function getApiReceipt() {
             const data = await response.json()
             state.receiptId = data.receipt.id
             state.receiptItems = data.receipt.items
-            state.receiptPrice = data.receipt.orderValue
+            state.receiptPrice = data.receipt.orderValue //TODO moms 
             console.log('this is the receiptId', state.receiptId, state.receiptItems, state.receiptPrice)
         }catch (error){
             console.error(error.message)    
     }
 }
-
 
 

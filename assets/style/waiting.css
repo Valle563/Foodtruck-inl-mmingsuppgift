@@ -1,0 +1,90 @@
+
+#waiting {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative; 
+    background: var(--brown);
+}
+
+.waiting-container {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.waiting-box-img {
+    width: 100%;
+    max-width: 368px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.waiting-title {
+    color: var(--white);
+    font-weight: bold;
+}
+
+.waiting-eta {
+    color: var(--white);
+
+}
+
+.waiting-order-id {
+    color: var(--white);
+    font-size: 14px;
+}
+
+.waiting-title, .waiting-eta, .waiting-order-id {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.receipt-btn {
+    display: flex;
+    width: clamp(300px, 87vw, 500px);
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.403);
+    color: rgba(255, 255, 255, 0.666);
+    margin-inline: auto;
+    justify-content: center;
+    margin-top: 40px;
+    border-radius: 5px;
+    font-size: 1.5em;
+    padding: 20px 0;
+    white-space: nowrap;
+    font-weight: bold;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.receipt-btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 2px 13px black;
+    background-color: var(--light-gray-menu);
+}
+
+.new-order-btn {
+    font-size: 1.5em;
+    font-weight: bold;
+    width: clamp(300px, 87vw, 500px);
+    padding: 20px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    margin-inline: auto;
+    background-color: var(--dark);
+    color: var(--white);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.new-order-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 13px black;
+    background-color: var(--dark);
+}

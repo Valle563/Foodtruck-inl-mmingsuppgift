@@ -1,6 +1,7 @@
 import { state } from '../state/state.js'
 import { displaySection } from '../display.js'
 import { getApiReceipt } from '../api/api.js'
+import { clearTimer } from './waiting.js'
 
 export function initWaitingButtons() {
     // Receipt button
@@ -9,6 +10,7 @@ export function initWaitingButtons() {
         receiptBtn.addEventListener('click', async () => {
             await getApiReceipt()
             displaySection(3)
+            clearTimer()
         })
     }
     
@@ -19,6 +21,7 @@ export function initWaitingButtons() {
             state.cart = []
             state.order = []
             displaySection(0)
+            clearTimer()
         })
     }
 }

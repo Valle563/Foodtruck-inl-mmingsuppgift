@@ -8,8 +8,9 @@ export function renderWaiting() {
     waitingContainer.className = 'waiting-container'
     
     // Waiting box
-    const waitingBox = document.createElement('div')
-    waitingBox.className = 'waiting-box'
+    const waitingBoxImg = document.createElement('div')
+    waitingBoxImg.className = 'waiting-box-img'
+    waitingBoxImg.innerHTML = `<img class="waiting-box-img" src="./assets/images/boxtop.png" alt="waiting-box-img">` 
     
     const wontonBox = document.createElement('div')
     wontonBox.className = 'wonton-box'
@@ -19,22 +20,20 @@ export function renderWaiting() {
     
     const logoText = document.createElement('span')
     logoText.className = 'logo-text'
-    logoText.innerHTML = 'Y Y<br>G S'
     
     logoBadge.appendChild(logoText)
     wontonBox.appendChild(logoBadge)
-    waitingBox.appendChild(wontonBox)
+    waitingBoxImg.appendChild(wontonBox)
     
     // Title
     const title = document.createElement('h2')
     title.className = 'waiting-title'
-    title.innerHTML = 'DINA WONTONS<br>TILLAGAS!'
+    title.textContent = 'DINA WONTONS TILLAGAS!'
     
     // ETA
     const eta = document.createElement('p')
     eta.className = 'waiting-eta'
-    eta.textContent = `ETA ${state.eta} MIN`
-    
+
     // Order ID
     const orderId = document.createElement('p')
     orderId.className = 'waiting-order-id'
@@ -52,7 +51,7 @@ export function renderWaiting() {
     newOrderBtn.id = 'new-order-btn'
     newOrderBtn.textContent = 'GÖR EN NY BESTÄLLNING'
     
-    waitingContainer.appendChild(waitingBox)
+    waitingContainer.appendChild(waitingBoxImg)
     waitingContainer.appendChild(title)
     waitingContainer.appendChild(eta)
     waitingContainer.appendChild(orderId)
@@ -60,4 +59,37 @@ export function renderWaiting() {
     waitingContainer.appendChild(newOrderBtn)
     
     waitingSection.appendChild(waitingContainer)
+
+    setTimer()
 }
+
+let timerTracker = null
+let seconds = 0
+
+
+// timer ( hjälp av andreas )
+function setTimer() {
+    const eta = document.querySelector('.waiting-eta')
+    const timeLeftMiliseconds = state.eta-state.timestamp
+    seconds = Math.floor(timeLeftMiliseconds / 1000)
+    
+    if (timerTracker) {
+        clearInterval(timerTracker)
+    } 
+    timerTracker = setInterval(() => {
+        const minutes = Math.floor(seconds / 60)
+        if( seconds >= 0 ){
+            eta.textContent = `ETA ${minutes} MIN`
+        }else {
+            eta.textContent = `DIN MAT ÄR KLAR!`
+        }
+        seconds--
+    }, 1000)
+}
+
+export function clearTimer() {
+    clearInterval(timerTracker)
+    timerTracker = null
+    eta.innerHTML = ''
+}
+

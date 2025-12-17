@@ -23,110 +23,92 @@ export function renderCart() {
     cartIconContainer.appendChild(cartBtn)
     cartSection.appendChild(cartIconContainer)
     
-    // Cart header (keeps icon placement consistent with menu)
-    const cartHeader = document.createElement('div')
-    cartHeader.className = 'cart-header'
-
+   
+    // const cartItems = document.createElement('div')
+    // cartItems.className = 'cart-items'
     
+
     // Cart items container
-    const cartItems = document.createElement('div')
-    cartItems.className = 'cart-items'
+    // const cartHeader = document.createElement('div')
+    // cartHeader.className = 'cart-header'
     
     if (state.cart.length > 0) {
         state.cart.forEach(item => {
             const cartItem = createCartItem(item)
-            cartItems.appendChild(cartItem)
+            cartSection.appendChild(cartItem)
         })
+        const cartFooter = createCartFooter()
+        cartSection.appendChild(cartFooter)
     } else {
         const emptyMsg = document.createElement('p')
         emptyMsg.className = 'empty-cart'
         emptyMsg.textContent = 'Din varukorg är tom'
         cartItems.appendChild(emptyMsg)
     }
-    
-    cartSection.appendChild(cartHeader)
-    cartSection.appendChild(cartItems)
-    
-    // Cart footer (only if cart has items)
-    if (state.cart.length > 0) {
-        const cartFooter = createCartFooter()
-        cartSection.appendChild(cartFooter)
-    }
 }
 
 function createCartItem(item) {
-    const cartItem = document.createElement('div')
-    cartItem.className = 'cart-item'
-
+    
     // Cart item header (name left, buttons right)
-    const itemHeader = document.createElement('div')
-    itemHeader.className = 'cart-item-header'
-
+    // const itemHeader = document.createElement('div')
+    // itemHeader.className = cart-item-header
+    
     const itemName = document.createElement('h3')
     itemName.className = 'cart-item-name'
     itemName.textContent = item.name
-
+    
     const itemPrice = document.createElement('span')
     itemPrice.className = 'cart-item-price'
     itemPrice.textContent = `${item.price * item.quantity} SEK`
-
+    
     const titleRow = document.createElement('div')
     titleRow.className = 'title-row'
-
+    
     const dottedLine = document.createElement('span')
     dottedLine.className = 'dotted-line'
-
-    titleRow.appendChild(itemName)
-    titleRow.appendChild(dottedLine)
-    titleRow.appendChild(itemPrice)
-
+    
+    titleRow.append(itemName, dottedLine, itemPrice)
+    
     // Buttons go in the header right side (swap with price)
     const decreaseBtn = document.createElement('button')
     decreaseBtn.className = 'quantity-btn decrease-btn'
     decreaseBtn.dataset.id = item.id
     decreaseBtn.textContent = '−'
-
+    
     const increaseBtn = document.createElement('button')
     increaseBtn.className = 'quantity-btn increase-btn'
     increaseBtn.dataset.id = item.id
     increaseBtn.textContent = '+'
-
+    
     const quantity = document.createElement('span')
     quantity.className = 'quantity'
     quantity.textContent = 
-        item.quantity === 1
-            ? `${item.quantity} styck`
-            : `${item.quantity} stycken`
+    item.quantity === 1
+    ? `${item.quantity} styck`
+    : `${item.quantity} stycken`
     
-    const headerRight = document.createElement('div')
-    headerRight.className = 'header-right'
-
-    headerRight.appendChild(decreaseBtn)
-    headerRight.appendChild(quantity)
-    headerRight.appendChild(increaseBtn)
-
-
-    itemHeader.appendChild(titleRow)
-    itemHeader.appendChild(headerRight)
-
+    const cartControls = document.createElement('div')
+    cartControls.className = 'cart-item-controls'
+    
+    cartControls.append(decreaseBtn, quantity, increaseBtn)
+    
+    
     // Cart item controls (price left, quantity text right)
-    const itemControls = document.createElement('div')
-    itemControls.className = 'cart-item-controls'
-
-    // const itemPrice = document.createElement('span')
-    // itemPrice.className = 'cart-item-price'
-    // itemPrice.textContent = `${item.price * item.quantity} SEK`
-
-    // itemControls.appendChild(itemPrice)
-    cartItem.appendChild(itemHeader)
-    cartItem.appendChild(itemControls)
+    // const itemControls = document.createElement('div')
+    // itemControls.className = 'cart-item-controls'
+    
+    
+    const cartItem = document.createElement('div')
+    cartItem.className = 'cart-item'
+    
+    cartItem.append(titleRow, cartControls)
 
     return cartItem
 }
 
 function createCartFooter() {
     const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-    const moms = Math.round(subtotal * 0.20)
+    const moms = Math.round(subtotal * 0.20) /* total price with moms */
     const total = subtotal + moms
 
     const cartFooter = document.createElement('div')
@@ -139,17 +121,17 @@ function createCartFooter() {
     const totalLabel = document.createElement('div')
     totalLabel.className = 'total-label'
 
-    const totalText = document.createElement('span')
+    const totalText = document.createElement('h3')
     totalText.textContent = 'TOTALT'
 
-    const momsText = document.createElement('span')
+    const momsText = document.createElement('p')
     momsText.className = 'moms-text'
     momsText.textContent = 'inkl 20% moms'
 
     totalLabel.appendChild(totalText)
     totalLabel.appendChild(momsText)
 
-    const totalPrice = document.createElement('span')
+    const totalPrice = document.createElement('h2')
     totalPrice.className = 'total-price'
     totalPrice.textContent = `${total} SEK`
 

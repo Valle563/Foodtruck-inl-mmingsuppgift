@@ -1,20 +1,29 @@
 
 
 /* Ensure the main area fills the viewport (main colors are in main.css) */
+
 #menu {
     min-height: 100vh;
     /* padding: 26px 20px; */
     display: block
 }
 
+.menu-style {
+    background-color: var(--green);
+    min-height: 100vh;
+    position: relative;
+    padding-top: 40px;
+}
+
 .menu-title{
     color:var(--white);
     font-size: 34px;
-    margin: 12px 0 18px 8px;
+    margin: 0px 0 30px 8px;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 900;
-    text-shadow: 0 2px 0 rgba(0,0,0,0.08)
+    text-shadow: 0 2px 0 rgba(0,0,0,0.08);
+
 }
 
 .menu-container{
@@ -59,7 +68,8 @@
     font-weight: 800;
     color:var(--white);
     font-size: 15px;
-    z-index: 2
+    z-index: 2;
+    margin-right: 20px;
 }
 
 .wonton-price{ 
@@ -69,18 +79,10 @@
     z-index: 2
 }
 
-/* dotted leader between name and price */
-.wonton-header::before{
-    content:'';
-    position:absolute;
-    left: 12px; 
-    right: 72px;
-    top:50%; 
-    height: 2px;
-    transform: translateY(-50%);
-    background-image:repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 2px, transparent 2px 8px);
-    z-index:1
+.wonton-header .dotted-line {
+    background: repeating-linear-gradient(to right, white 0px 2px, transparent 2px 4px);
 }
+
 
 .wonton-ingredients{ 
     color: rgba(255,255,255,0.85);
@@ -118,7 +120,7 @@
 }
 
 .menu-btn{
-    background: var(--light); /* match the inner strip gray */
+    background: var(--light); 
     color: var(--white);
     border: none;
     padding: 8px 12px;
@@ -128,20 +130,10 @@
 }
 
 .menu-btn:hover{
-    filter:brightness(0.92); /* subtle darken on hover */
+    filter: brightness(0.92); /* subtle darken on hover */
     transform: translateY(-3px) scale(1.01);
 }
 
-.menu-btn{ 
-    transition: transform 160ms ease, filter 160ms ease;
-    will-change: transform}
-
-/* Cart button animation and icon sizing */
-.cart-btn{ transition: transform 200ms ease, box-shadow 200ms ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center
-}
 
 .cart-btn:hover{
     transform: translateY(-6px) scale(1.04);
@@ -150,12 +142,6 @@
 
 .cart-btn:active{
     transform: translateY(-2px) scale(0.99)
-}
-
-.cart-icon-img{
-    width: 28px;
-    height: 28px;
-    display:block
 }
 
 
@@ -174,17 +160,17 @@
     display: inline-flex;
     align-items: center;
     justify-content:center
-    
 }
 
 .cart-badge{
     position: absolute;
+    top: -6px;
     right: -6px;
     background: var(--red);
     color: var(--white);
     font-size: 12px;
     padding: 4px 6px;
-    border-radius:999px
+    border-radius:999px;
 }
 
 /* Responsive down to 350px */

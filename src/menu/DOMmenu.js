@@ -71,13 +71,15 @@ function renderWontons() {
         const wontonName = document.createElement('h3')
         wontonName.className = 'wonton-name'
         wontonName.textContent = wonton.name
+
+        const wontonDots = document.createElement('span')
+        wontonDots.className = 'dotted-line'
         
         const wontonPrice = document.createElement('span')
         wontonPrice.className = 'wonton-price'
         wontonPrice.textContent = `${wonton.price} SEK`
         
-        wontonHeader.appendChild(wontonName)
-        wontonHeader.appendChild(wontonPrice)
+        wontonHeader.append(wontonName, wontonDots, wontonPrice)
         
         const wontonIngredients = document.createElement('p')
         wontonIngredients.className = 'wonton-ingredients'
@@ -86,9 +88,8 @@ function renderWontons() {
         const wontonLine = document.createElement('div')
         wontonLine.className = 'wonton-line'
         
-        wontonItem.appendChild(wontonHeader)
-        wontonItem.appendChild(wontonIngredients)
-        wontonItem.appendChild(wontonLine)
+        wontonItem.append(wontonHeader, wontonIngredients, wontonLine)
+        
         
         wontonsSection.appendChild(wontonItem)
     })
