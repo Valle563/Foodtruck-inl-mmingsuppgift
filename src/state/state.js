@@ -3,7 +3,7 @@
 export const state = {
     menu: [], 
     cart: [], 
-    order: [1, 2, 3,], 
+    order: [], 
     receipt: [],
     apiKey: '',
     tenantId: '',

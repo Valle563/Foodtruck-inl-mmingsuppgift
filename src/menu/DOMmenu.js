@@ -1,7 +1,5 @@
 import { state } from '../state/state.js'
-import { displaySection } from '../display.js'
-import { renderCart } from '../cart/cart.js'
-
+import { drinkButtons, dipButtons, initMenuCartButton, wontonButtons } from './menuButtons.js'
 export function renderMenu() {
     const menuSection = document.querySelector('#menu')
     menuSection.innerHTML = '' 
@@ -12,7 +10,7 @@ export function renderMenu() {
     
     const cartBtn = document.createElement('button')
     cartBtn.className = 'cart-btn'
-    cartBtn.id = 'cart-btn'
+    cartBtn.id = 'cart-btn-menu'
     // use external SVG file for the cart icon so it's easier to update
     cartBtn.innerHTML = `<img class="cart-icon-img" src="./assets/images/cart.svg" alt="cart">`
     
@@ -23,14 +21,8 @@ export function renderMenu() {
         cartBtn.appendChild(badge)
     }
 
-    // ensure cart button navigates to cart view
-    // cartBtn.addEventListener('click', () => {
-    //     renderCart()
-    //     displaySection(1)
-    // })
-    // TODO anropa en function som lägger en knapp på cartBtn
-    
     cartIconContainer.appendChild(cartBtn)
+    
     
     // Menu title
     const menuTitle = document.createElement('h1')
@@ -57,6 +49,7 @@ export function renderMenu() {
     menuSection.appendChild(cartIconContainer)
     menuSection.appendChild(menuTitle)
     menuSection.appendChild(menuContainer)
+    initMenuCartButton()
 }
 
 function renderWontons() {
@@ -69,8 +62,8 @@ function renderWontons() {
         const wontonItem = document.createElement('div')
         wontonItem.className = 'wonton-item'
         wontonItem.dataset.id = wonton.id
-        
-        //TODO anropa en funtion som stoppar en eventlistener på wonton item, skicka med wonton.id 
+        wontonButtons(wontonItem)
+
         const wontonHeader = document.createElement('div')
         wontonHeader.className = 'wonton-header'
         
@@ -122,7 +115,7 @@ function renderDipsSection() {
         dipBtn.dataset.id = dip.id
         dipBtn.textContent = dip.name
         dipsGrid.appendChild(dipBtn)
-        // TODO anropa en function som stoppar event.listener skicka med dip.id
+        dipButtons(dipBtn)
     })
     
     dipsSection.appendChild(sectionTitle)
@@ -150,7 +143,7 @@ function renderDrinksSection() {
         drinkBtn.dataset.id = drink.id
         drinkBtn.textContent = drink.name
         drinksGrid.appendChild(drinkBtn)
-        // TODO anropa en function som stoppar event.listener skicka med drink.id
+        drinkButtons(drinkBtn)
     })
     
     drinksSection.appendChild(sectionTitle)

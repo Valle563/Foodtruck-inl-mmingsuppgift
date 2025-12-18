@@ -1,54 +1,57 @@
 import { state } from '../state/state.js'
 import { displaySection } from '../display.js'
-import { renderMenu } from './DOMmenu.js'
+import { createCartItem, renderCart } from '../cart/cart.js'
 
-export function initMenuButtons() {
+export function initMenuCartButton() {
     // Cart button
-    const cartBtn = document.querySelector('#cart-btn')
+    const cartBtn = document.querySelector('#cart-btn-menu')
     if (cartBtn) {
         cartBtn.addEventListener('click', () => {
             displaySection(1)
         })
     }
-    
+}
+
+export function wontonButtons(target) {
     // Wonton items
-    document.querySelectorAll('.wonton-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            const id = parseInt(e.currentTarget.dataset.id)
-            addToCart(id)
-        })
-    })
-    
+
+    target.addEventListener(`click`, () => {
+        addToCart(target.dataset.id)
+        console.log(state.cart)
+    }) 
+}
+
+export function dipButtons(target) {
     // Dip buttons
-    document.querySelectorAll('.dip-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const id = parseInt(e.currentTarget.dataset.id)
-            addToCart(id)
-        })
-    })
-    
+     target.addEventListener(`click`, () => {
+        addToCart(target.dataset.id)
+        console.log(state.cart)
+    }) 
+}
+
+export function drinkButtons(target) {
     // Drink buttons
-    document.querySelectorAll('.drink-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const id = parseInt(e.currentTarget.dataset.id)
-            addToCart(id)
-        })
-    })
+     target.addEventListener(`click`, () => {
+        addToCart(target.dataset.id)
+        console.log(state.cart)
+    }) 
 }
 
 function addToCart(itemId) {
-    const existingItem = state.cart.find(item => item.id === itemId)
+    const existingItem = state.cart.find(item => item.id === Number(itemId))
     
     if (existingItem) {
         existingItem.quantity++
     } else {
-        const menuItem = state.menu.find(item => item.id === itemId)
-        state.cart.push({
-            ...menuItem,
-            quantity: 1
-        })
+        const menuItem = state.menu.find(item => item.id === Number(itemId))
+        
+        if(menuItem) {
+            state.cart.push({
+                ...menuItem,
+                quantity: 1
+            })
+            console.log(menuItem)
+            createCartItem(menuItem)
+        }
     }
-    
-    renderMenu()
-    initMenuButtons()
 }

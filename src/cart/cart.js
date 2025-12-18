@@ -1,5 +1,5 @@
 import { state } from '../state/state.js'
-import { displaySection } from '../display.js'
+import { backToMenuBtn } from './cartButtons.js'
 
 export function renderCart() {
     const cartSection = document.querySelector('#cart')
@@ -9,7 +9,7 @@ export function renderCart() {
     cartIconContainer.className = 'cart-icon-container'
     const cartBtn = document.createElement('button')
     cartBtn.className = 'cart-btn'
-    cartBtn.id = 'cart-btn'
+    cartBtn.id = 'cart-btn-cart'
     cartBtn.innerHTML = `<img class="cart-icon-img" src="./assets/images/cart.svg" alt="cart">`
     // show badge (consistent with menu) when there are items
     if (state.cart.length > 0) {
@@ -18,42 +18,35 @@ export function renderCart() {
         badge.textContent = state.cart.length
         cartBtn.appendChild(badge)
     }
-    // clicking the cart icon in the cart view goes back to the menu
-    // cartBtn.addEventListener('click', () => displaySection(0))
+    
 
     cartIconContainer.appendChild(cartBtn)
-    cartSection.appendChild(cartIconContainer)
-    // TODO lägg en eventlistnener på cartBtn 
+    const cartItemSection = document.createElement('div')
+    cartItemSection.classList.add('cart-item-section')
+    cartSection.append(cartIconContainer, cartItemSection)
     
-   
-    // const cartItems = document.createElement('div')
-    // cartItems.className = 'cart-items'
     
 
-    // Cart items container
-    // const cartHeader = document.createElement('div')
-    // cartHeader.className = 'cart-header'
+
+    // TODO lägg en eventlistnener på cartBtn 
     // TODO gör till en egen function 
-    if (state.cart.length > 0) {
-        state.cart.forEach(item => {
-            const cartItem = createCartItem(item)
-            cartSection.appendChild(cartItem)
-        })
-        const cartFooter = createCartFooter()
-        cartSection.appendChild(cartFooter)
-    } else {
-        const emptyMsg = document.createElement('p')
-        emptyMsg.className = 'empty-cart'
-        emptyMsg.textContent = 'Din varukorg är tom'
-        cartSection.appendChild(emptyMsg)
-    }
+    // if (state.cart.length > 0) {
+    //     state.cart.forEach(item => {
+    //         const cartItem = createCartItem(item)
+    //         cartSection.appendChild(cartItem)
+    //     })
+    //     const cartFooter = createCartFooter()
+    //     cartSection.appendChild(cartFooter)
+    // } else {
+    //     const emptyMsg = document.createElement('p')
+    //     emptyMsg.className = 'empty-cart'
+    //     emptyMsg.textContent = 'Din varukorg är tom'
+    //     cartSection.appendChild(emptyMsg)
+    // }
+    backToMenuBtn()
 }
 
-function createCartItem(item) {
-    
-    // Cart item header (name left, buttons right)
-    // const itemHeader = document.createElement('div')
-    // itemHeader.className = cart-item-header
+export function createCartItem(item) {
     
     const itemName = document.createElement('h3')
     itemName.className = 'cart-item-name'
@@ -96,17 +89,13 @@ function createCartItem(item) {
     
     // TODO anropa två funtioner som stoppar event.listener på knapparna 
     
-    // Cart item controls (price left, quantity text right)
-    // const itemControls = document.createElement('div')
-    // itemControls.className = 'cart-item-controls'
-    
-    
     const cartItem = document.createElement('div')
     cartItem.className = 'cart-item'
     
     cartItem.append(titleRow, cartControls)
-
-    return cartItem
+    
+    const cartItemSection = document.querySelector('.cart-item-section')
+    cartItemSection.appendChild(cartItem)
 }
 
 function createCartFooter() {

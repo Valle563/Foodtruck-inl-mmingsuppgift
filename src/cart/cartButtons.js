@@ -3,29 +3,30 @@ import { displaySection } from '../display.js'
 import { renderCart } from './cart.js'
 import { getApiOrderInfo } from '../api/api.js'
 
-export function initCartButtons() {
+export function backToMenuBtn() {
+    console.log('test1')
     // Back / menu button (top-right cart icon)
-    const backBtn = document.querySelector('#cart-btn')
-    if (backBtn) {
+    const backBtn = document.querySelector('#cart-btn-cart')
+    console.log(backBtn)
         backBtn.addEventListener('click', () => {
+            console.log('test')
             displaySection(0)
         })
     }
-    
-    // Order button
-    const orderBtn = document.querySelector('#order-btn')
-    if (orderBtn) {
-        orderBtn.addEventListener('click', placeOrder)
+
+    export function orderBtn() {
+        const orderBtn = document.querySelector('#order-btn')
+        if (orderBtn) {
+            orderBtn.addEventListener('click', placeOrder)
+        }
     }
+    // Order button
     
     // Increase buttons
-    console.log('test4')
     document.querySelectorAll('.increase-btn').forEach(btn => {
-        console.log('test3')
         btn.addEventListener('click', (e) => {
             const id = parseInt(e.currentTarget.dataset.id)
             updateQuantity(id, 1)
-            console.log('test1', id)
         })
     })
     
@@ -37,7 +38,7 @@ export function initCartButtons() {
             console.log('test2', id)
         })
     })
-}
+
 
 function updateQuantity(itemId, change) {
     console.log('test5')
