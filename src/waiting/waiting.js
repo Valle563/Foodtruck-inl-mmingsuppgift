@@ -88,6 +88,7 @@ function setTimer() {
 }
 
 export function clearTimer() {
+    const eta = document.querySelector('.waiting-eta')
     clearInterval(timerTracker)
     timerTracker = null
     eta.innerHTML = ''

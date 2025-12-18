@@ -19,10 +19,13 @@ export function initCartButtons() {
     }
     
     // Increase buttons
+    console.log('test4')
     document.querySelectorAll('.increase-btn').forEach(btn => {
+        console.log('test3')
         btn.addEventListener('click', (e) => {
             const id = parseInt(e.currentTarget.dataset.id)
             updateQuantity(id, 1)
+            console.log('test1', id)
         })
     })
     
@@ -31,11 +34,13 @@ export function initCartButtons() {
         btn.addEventListener('click', (e) => {
             const id = parseInt(e.currentTarget.dataset.id)
             updateQuantity(id, -1)
+            console.log('test2', id)
         })
     })
 }
 
 function updateQuantity(itemId, change) {
+    console.log('test5')
     const item = state.cart.find(item => item.id === itemId)
     
     if (item) {

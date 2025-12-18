@@ -23,7 +23,11 @@ html, body {
 }
 
 /* Utility to hide sections when not active */
-.remove-display{display:none}
+.remove-display {
+    display: none;
+}
+
+
 
 /* Ensure each section can fill the viewport when shown */
 section{width:100%;min-height:100vh}

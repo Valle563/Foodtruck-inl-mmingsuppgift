@@ -27,36 +27,36 @@ async function init() {
 }
 
 // Listen for section changes and initialize buttons accordingly
-const observer = new MutationObserver(() => {
-    const menu = document.querySelector('#menu')
-    const cart = document.querySelector('#cart')
-    const waiting = document.querySelector('#waiting')
-    const receipt = document.querySelector('#receipt')
+// const observer = new MutationObserver(() => {
+//     const menu = document.querySelector('#menu')
+//     const cart = document.querySelector('#cart')
+//     const waiting = document.querySelector('#waiting')
+//     const receipt = document.querySelector('#receipt')
 
-    const menuVisible = menu && window.getComputedStyle(menu).display !== 'none'
-    const cartVisible = cart && window.getComputedStyle(cart).display !== 'none'
-    const waitingVisible = waiting && window.getComputedStyle(waiting).display !== 'none'
-    const receiptVisible = receipt && window.getComputedStyle(receipt).display !== 'none'
+//     const menuVisible = menu && window.getComputedStyle(menu).display !== 'none'
+//     const cartVisible = cart && window.getComputedStyle(cart).display !== 'none'
+//     const waitingVisible = waiting && window.getComputedStyle(waiting).display !== 'none'
+//     const receiptVisible = receipt && window.getComputedStyle(receipt).display !== 'none'
 
-    if (menuVisible) {
-        renderMenu()
-        initMenuButtons()
-    } else if (cartVisible) {
-        renderCart()
-        initCartButtons()
-    } else if (waitingVisible) {
-        renderWaiting()
-        initWaitingButtons()
-    } else if (receiptVisible) {
-        renderReceipt()
-        initReceiptButtons()
-    }
-})
+//     if (menuVisible) {
+//         renderMenu()
+//         initMenuButtons()
+//     } else if (cartVisible) {
+//         renderCart()
+//         initCartButtons()
+//     } else if (waitingVisible) {
+//         renderWaiting()
+//         initWaitingButtons()
+//     } else if (receiptVisible) {
+//         renderReceipt()
+//         initReceiptButtons()
+//     }
+// })
 
-observer.observe(document.body, { 
-    attributes: true, 
-    subtree: true, 
-    attributeFilter: ['style', 'class'] 
-})
+// observer.observe(document.body, { 
+//     attributes: true, 
+//     subtree: true, 
+//     attributeFilter: ['style', 'class'] 
+// })
 
 init()

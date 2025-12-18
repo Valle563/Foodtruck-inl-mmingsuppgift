@@ -19,9 +19,11 @@ export function renderCart() {
         cartBtn.appendChild(badge)
     }
     // clicking the cart icon in the cart view goes back to the menu
-    cartBtn.addEventListener('click', () => displaySection(0))
+    // cartBtn.addEventListener('click', () => displaySection(0))
+
     cartIconContainer.appendChild(cartBtn)
     cartSection.appendChild(cartIconContainer)
+    // TODO lägg en eventlistnener på cartBtn 
     
    
     // const cartItems = document.createElement('div')
@@ -31,7 +33,7 @@ export function renderCart() {
     // Cart items container
     // const cartHeader = document.createElement('div')
     // cartHeader.className = 'cart-header'
-    
+    // TODO gör till en egen function 
     if (state.cart.length > 0) {
         state.cart.forEach(item => {
             const cartItem = createCartItem(item)
@@ -43,7 +45,7 @@ export function renderCart() {
         const emptyMsg = document.createElement('p')
         emptyMsg.className = 'empty-cart'
         emptyMsg.textContent = 'Din varukorg är tom'
-        cartItems.appendChild(emptyMsg)
+        cartSection.appendChild(emptyMsg)
     }
 }
 
@@ -92,6 +94,7 @@ function createCartItem(item) {
     
     cartControls.append(decreaseBtn, quantity, increaseBtn)
     
+    // TODO anropa två funtioner som stoppar event.listener på knapparna 
     
     // Cart item controls (price left, quantity text right)
     // const itemControls = document.createElement('div')
@@ -146,6 +149,8 @@ function createCartFooter() {
 
     cartFooter.appendChild(totalSection)
     cartFooter.appendChild(orderBtn)
+
+    // TODO anropa en function 
 
     return cartFooter
 }

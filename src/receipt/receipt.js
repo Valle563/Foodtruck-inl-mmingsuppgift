@@ -14,6 +14,7 @@ export function renderReceipt() {
     // Receipt logo
     const receiptLogo = document.createElement('div')
     receiptLogo.className = 'receipt-logo'
+    receiptLogo.innerHTML = `<img class="receipt-logo-img" src="assets/images/logo.png" alt="logo img">` 
     
     const logoBadge = document.createElement('div')
     logoBadge.className = 'receipt-logo-badge'

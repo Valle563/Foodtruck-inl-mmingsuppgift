@@ -1,5 +1,6 @@
 import { state } from '../state/state.js'
 import { displaySection } from '../display.js'
+import { renderCart } from '../cart/cart.js'
 
 export function renderMenu() {
     const menuSection = document.querySelector('#menu')
@@ -23,7 +24,11 @@ export function renderMenu() {
     }
 
     // ensure cart button navigates to cart view
-    cartBtn.addEventListener('click', () => displaySection(1))
+    // cartBtn.addEventListener('click', () => {
+    //     renderCart()
+    //     displaySection(1)
+    // })
+    // TODO anropa en function som lägger en knapp på cartBtn
     
     cartIconContainer.appendChild(cartBtn)
     
@@ -65,6 +70,7 @@ function renderWontons() {
         wontonItem.className = 'wonton-item'
         wontonItem.dataset.id = wonton.id
         
+        //TODO anropa en funtion som stoppar en eventlistener på wonton item, skicka med wonton.id 
         const wontonHeader = document.createElement('div')
         wontonHeader.className = 'wonton-header'
         
@@ -116,6 +122,7 @@ function renderDipsSection() {
         dipBtn.dataset.id = dip.id
         dipBtn.textContent = dip.name
         dipsGrid.appendChild(dipBtn)
+        // TODO anropa en function som stoppar event.listener skicka med dip.id
     })
     
     dipsSection.appendChild(sectionTitle)
@@ -143,6 +150,7 @@ function renderDrinksSection() {
         drinkBtn.dataset.id = drink.id
         drinkBtn.textContent = drink.name
         drinksGrid.appendChild(drinkBtn)
+        // TODO anropa en function som stoppar event.listener skicka med drink.id
     })
     
     drinksSection.appendChild(sectionTitle)
