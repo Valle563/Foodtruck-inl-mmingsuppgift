@@ -7,7 +7,6 @@ export async function getApiKey() {
     })    
     const data = await res.json()
     state.apiKey = data.key
-    console.log('this is the API key', state.apiKey)
 }
 
 // create tenat
@@ -27,7 +26,6 @@ export async function getApiTenant() {
             const data = await response.json()
             state.tenantId = data.id
             state.tenantName = data.name
-            console.log('this is the tenantId',state.tenantId)
             
         }catch (error){
             console.error(error.message)    
@@ -43,11 +41,11 @@ export async function getApiMenu() {
                 'Content-Type': 'application/json'
             },
         })  
-            console.log('this is menu', response)
+            
             const data = await response.json()
-            console.log(data)
+            
             state.menu = data.items
-            console.log('this is state.menu', state.menu)
+            
 
         }catch (error){
             console.error(error.message)    
@@ -71,8 +69,6 @@ export async function getApiOrderInfo() {
             state.orderId = data.order.id
             state.eta = Date.parse(data.order.eta)
             state.timestamp = Date.parse(data.order.timestamp)
-            console.log(data)
-            console.log('this is the orderId',state.orderId)
 
         }catch (error){
             console.error(error.message)    
@@ -90,8 +86,7 @@ export async function getApiReceipt() {
             const data = await response.json()
             state.receiptId = data.receipt.id
             state.receiptItems = data.receipt.items
-            state.receiptPrice = data.receipt.orderValue //TODO moms 
-            console.log('this is the receiptId', state.receiptId, state.receiptItems, state.receiptPrice)
+            state.receiptPrice = data.receipt.orderValue 
         }catch (error){
             console.error(error.message)    
     }

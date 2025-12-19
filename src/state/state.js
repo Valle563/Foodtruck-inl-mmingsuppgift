@@ -11,9 +11,20 @@ export const state = {
     orderId: '',
     eta: '',
     timestamp: '',
-    totalPrice: '',
+    totalPrice: 0,
     receiptId: '',
     receiptItems: [],
     receiptPrice: '',
 }
+
+export function updateTotalPrice() {
+    const subtotal = state.cart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+    )
+
+    const moms = Math.round(subtotal * 0.20)
+    state.totalPrice = subtotal + moms
+}
+
 

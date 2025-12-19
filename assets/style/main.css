@@ -30,5 +30,8 @@ html, body {
 
 
 /* Ensure each section can fill the viewport when shown */
-section{width:100%;min-height:100vh}
+section{
+    width:100%;
+    /* min-height:100vh */
+}
 

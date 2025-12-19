@@ -1,5 +1,5 @@
 import { state } from '../state/state.js'
-
+import { initReceiptButtons } from './receiptButtons.js'
 export function renderReceipt() {
     const receiptSection = document.querySelector('#receipt')
     receiptSection.innerHTML = '' // Töm först
@@ -14,17 +14,13 @@ export function renderReceipt() {
     // Receipt logo
     const receiptLogo = document.createElement('div')
     receiptLogo.className = 'receipt-logo'
-    receiptLogo.innerHTML = `<img class="receipt-logo-img" src="assets/images/logo.png" alt="logo img">` 
+    const logoImg = document.createElement('img')
+    logoImg.src = './assets/images/logo.png'
+    logoImg.alt = 'Yum Yum Gim Mi Sum logo'
+    logoImg.className = 'receipt-logo-img'
+
+    receiptLogo.appendChild(logoImg)
     
-    const logoBadge = document.createElement('div')
-    logoBadge.className = 'receipt-logo-badge'
-    
-    const logoText = document.createElement('span')
-    logoText.className = 'receipt-logo-text'
-    logoText.innerHTML = 'Y Y<br>G S'
-    
-    logoBadge.appendChild(logoText)
-    receiptLogo.appendChild(logoBadge)
     
     // Receipt title
     const title = document.createElement('h2')
@@ -34,7 +30,9 @@ export function renderReceipt() {
     // Receipt ID
     const receiptId = document.createElement('p')
     receiptId.className = 'receipt-id'
-    receiptId.textContent = `#${state.receiptId.toUpperCase()}`
+    receiptId.textContent = state.orderId
+    ? `#${state.orderId.toUpperCase()}`
+    : '#----'
     
     // Receipt items
     const receiptItems = createReceiptItems()
@@ -58,65 +56,98 @@ export function renderReceipt() {
     receiptContainer.appendChild(newOrderBtn)
     
     receiptSection.appendChild(receiptContainer)
+
+    
+    // document.querySelectorAll('section').forEach(sec => {
+    //     if(sec.id !== 'receipt') {
+    //         sec.classList.add('remove-display')
+    //     }
+    // })
+    
+    // receiptSection.classList.remove('remove-display')
+    initReceiptButtons()
+    
 }
+
 
 function createReceiptItems() {
     const itemsContainer = document.createElement('div')
     itemsContainer.className = 'receipt-items'
-    
-    const itemCounts = {}
-    
-    state.receiptItems.forEach(item => {
-        if (itemCounts[item.name]) {
-            itemCounts[item.name].quantity++
-            itemCounts[item.name].totalPrice += item.price
-        } else {
-            itemCounts[item.name] = {
-                name: item.name,
-                quantity: 1,
-                price: item.price,
-                totalPrice: item.price
-            }
-        }
-    })
-    
-    Object.values(itemCounts).forEach(item => {
+
+    state.cart.forEach(item => {
         const itemRow = document.createElement('div')
         itemRow.className = 'receipt-item-row'
-        
+
         const itemName = document.createElement('div')
         itemName.className = 'receipt-item-name'
-        
+
         const nameSpan = document.createElement('span')
-        nameSpan.textContent = item.name
-        
+        nameSpan.textContent = item.name.toUpperCase()
+
         const quantitySpan = document.createElement('span')
         quantitySpan.className = 'receipt-item-quantity'
-        quantitySpan.textContent = `${item.quantity} stycken`
-        
-        itemName.appendChild(nameSpan)
-        itemName.appendChild(quantitySpan)
-        
+        quantitySpan.textContent =
+            item.quantity === 1
+                ? '1 styck'
+                : `${item.quantity} stycken`
+
+        itemName.append(nameSpan, quantitySpan)
+
         const itemPrice = document.createElement('span')
         itemPrice.className = 'receipt-item-price'
-        itemPrice.textContent = `${item.totalPrice} SEK`
-        
-        itemRow.appendChild(itemName)
-        itemRow.appendChild(itemPrice)
-        
-        const itemDots = document.createElement('div')
-        itemDots.className = 'receipt-item-dots'
-        
-        itemsContainer.appendChild(itemRow)
-        itemsContainer.appendChild(itemDots)
+        itemPrice.textContent = `${item.price * item.quantity} SEK`
+
+        itemRow.append(itemName, itemPrice)
+
+        const dots = document.createElement('div')
+        dots.className = 'receipt-item-dots'
+
+        itemsContainer.append(itemRow, dots)
     })
-    
+
     return itemsContainer
 }
+    
+    // Object.values(itemCounts).forEach(item => {
+    //     const itemRow = document.createElement('div')
+    //     itemRow.className = 'receipt-item-row'
+        
+    //     const itemName = document.createElement('div')
+    //     itemName.className = 'receipt-item-name'
+        
+    //     const nameSpan = document.createElement('span')
+    //     nameSpan.textContent = item.name
+        
+    //     const quantitySpan = document.createElement('span')
+    //     quantitySpan.className = 'receipt-item-quantity'
+    //     quantitySpan.textContent = `${item.quantity} stycken`
+        
+    //     itemName.appendChild(nameSpan)
+    //     itemName.appendChild(quantitySpan)
+        
+    //     const itemPrice = document.createElement('span')
+    //     itemPrice.className = 'receipt-item-price'
+    //     itemPrice.textContent = `${item.totalPrice} SEK`
+        
+    //     itemRow.appendChild(itemName)
+    //     itemRow.appendChild(itemPrice)
+        
+    //     const itemDots = document.createElement('div')
+    //     itemDots.className = 'receipt-item-dots'
+        
+    //     itemsContainer.appendChild(itemRow)
+    //     itemsContainer.appendChild(itemDots)
+    // })
+    
+    // return itemsContainer
+
+
 
 function createReceiptTotal() {
-    const subtotal = state.receiptPrice
-    const moms = Math.round(subtotal * 0.20)
+    // const subtotal = state.receiptPrice
+    // const moms = Math.round(subtotal * 0.20)
+    const total = state.totalPrice
+    
     
     const totalContainer = document.createElement('div')
     totalContainer.className = 'receipt-total'
@@ -128,7 +159,7 @@ function createReceiptTotal() {
     totalLabel.textContent = 'TOTALT'
     
     const totalAmount = document.createElement('span')
-    totalAmount.textContent = `${subtotal + moms} SEK`
+    totalAmount.textContent = `${total} SEK`
     
     totalRow.appendChild(totalLabel)
     totalRow.appendChild(totalAmount)

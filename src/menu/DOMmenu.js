@@ -151,3 +151,28 @@ function renderDrinksSection() {
     
     return drinksSection
 }
+
+// test
+export function updateCartBadge() {
+    const cartBtn = document.querySelector('#cart-btn-menu')
+    if (!cartBtn) return
+
+    let badge = cartBtn.querySelector('.cart-badge')
+
+    const totalItems = state.cart.reduce(
+        (sum, item) => sum + item.quantity, 0
+    )
+
+    if (totalItems === 0) {
+        if(badge) badge.remove()
+            return
+    }
+
+    if(!badge) {
+        badge = document.createElement('span')
+        badge.className = 'cart-badge'
+        cartBtn.appendChild(badge)
+    }
+
+    badge.textContent = totalItems
+}

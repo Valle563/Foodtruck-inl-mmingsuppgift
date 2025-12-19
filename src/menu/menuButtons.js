@@ -1,6 +1,7 @@
-import { state } from '../state/state.js'
+import { state, updateTotalPrice } from '../state/state.js'
 import { displaySection } from '../display.js'
-import { createCartItem, renderCart } from '../cart/cart.js'
+import { createCartItem, updateQuantityDom, updatePriceDom, updateTotalPriceDom } from '../cart/cart.js'
+import { updateCartBadge } from './DOMmenu.js'
 
 export function initMenuCartButton() {
     // Cart button
@@ -17,7 +18,7 @@ export function wontonButtons(target) {
 
     target.addEventListener(`click`, () => {
         addToCart(target.dataset.id)
-        console.log(state.cart)
+        
     }) 
 }
 
@@ -25,7 +26,7 @@ export function dipButtons(target) {
     // Dip buttons
      target.addEventListener(`click`, () => {
         addToCart(target.dataset.id)
-        console.log(state.cart)
+        
     }) 
 }
 
@@ -33,25 +34,29 @@ export function drinkButtons(target) {
     // Drink buttons
      target.addEventListener(`click`, () => {
         addToCart(target.dataset.id)
-        console.log(state.cart)
+        
     }) 
 }
 
-function addToCart(itemId) {
-    const existingItem = state.cart.find(item => item.id === Number(itemId))
-    
+
+export function addToCart(itemId) {
+    const id = Number(itemId)
+    const existingItem = state.cart.find(item => item.id === id)
+
     if (existingItem) {
         existingItem.quantity++
+        updateQuantityDom(id)
+        updatePriceDom(id)
     } else {
-        const menuItem = state.menu.find(item => item.id === Number(itemId))
-        
-        if(menuItem) {
-            state.cart.push({
-                ...menuItem,
-                quantity: 1
-            })
-            console.log(menuItem)
-            createCartItem(menuItem)
+        const menuItem = state.menu.find(item => item.id === id)
+        if (menuItem) {
+            const newItem = { ...menuItem, quantity: 1 }
+            state.cart.push(newItem)
+            createCartItem(newItem)
         }
     }
+
+    updateTotalPrice()
+    updateTotalPriceDom()
+    updateCartBadge()
 }

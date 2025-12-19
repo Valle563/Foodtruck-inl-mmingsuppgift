@@ -1,5 +1,5 @@
-import { state } from '../state/state.js'
-import { backToMenuBtn } from './cartButtons.js'
+import { state, updateTotalPrice } from '../state/state.js'
+import { backToMenuBtn, decreaseBtnFunction, increaseBtnFunction, orderBtnFunction } from './cartButtons.js'
 
 export function renderCart() {
     const cartSection = document.querySelector('#cart')
@@ -23,7 +23,9 @@ export function renderCart() {
     cartIconContainer.appendChild(cartBtn)
     const cartItemSection = document.createElement('div')
     cartItemSection.classList.add('cart-item-section')
-    cartSection.append(cartIconContainer, cartItemSection)
+    const cartFooterSection = document.createElement('div')
+    cartFooterSection.classList.add('cart-footer-section')
+    cartSection.append(cartIconContainer, cartItemSection, cartFooterSection)
     
     
 
@@ -44,10 +46,12 @@ export function renderCart() {
     //     cartSection.appendChild(emptyMsg)
     // }
     backToMenuBtn()
+    createCartFooter()
 }
 
 export function createCartItem(item) {
     
+    console.log('createCartItem', item)
     const itemName = document.createElement('h3')
     itemName.className = 'cart-item-name'
     itemName.textContent = item.name
@@ -55,6 +59,7 @@ export function createCartItem(item) {
     const itemPrice = document.createElement('span')
     itemPrice.className = 'cart-item-price'
     itemPrice.textContent = `${item.price * item.quantity} SEK`
+    console.log('price, quantity', item.price, item.quantity)
     
     const titleRow = document.createElement('div')
     titleRow.className = 'title-row'
@@ -75,6 +80,8 @@ export function createCartItem(item) {
     increaseBtn.dataset.id = item.id
     increaseBtn.textContent = '+'
     
+    increaseBtnFunction(increaseBtn)
+    decreaseBtnFunction(decreaseBtn)
     const quantity = document.createElement('span')
     quantity.className = 'quantity'
     quantity.textContent = 
@@ -91,17 +98,43 @@ export function createCartItem(item) {
     
     const cartItem = document.createElement('div')
     cartItem.className = 'cart-item'
-    
+    cartItem.dataset.id = item.id
     cartItem.append(titleRow, cartControls)
     
     const cartItemSection = document.querySelector('.cart-item-section')
     cartItemSection.appendChild(cartItem)
 }
 
+export function removeCartDomItem(itemId) {
+
+    document.querySelector(`.cart-item[data-id="${itemId}"]`).remove()
+}
+
+export function updateQuantityDom(itemId) {
+    const item = state.cart.find(item => item.id === itemId)
+    if(!item)return
+    const placement = document.querySelector(`.cart-item[data-id="${itemId}"] .quantity`)
+    if(item.quantity === 1) {
+        placement.textContent = `${item.quantity} styck`
+    }else {
+        placement.textContent = `${item.quantity} stycken`
+    }
+}
+
+export function updatePriceDom(itemId) {
+    const item = state.cart.find(item => item.id === itemId)
+    if(!item)return
+    const placement = document.querySelector(`.cart-item[data-id="${itemId}"] .cart-item-price`)
+    placement.textContent = `${item.price * item.quantity} SEK`
+}
+export function updateTotalPriceDom(){
+    const placement = document.querySelector('.total-price')
+    placement.textContent = `${state.totalPrice} SEK`
+}
 function createCartFooter() {
-    const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-    const moms = Math.round(subtotal * 0.20) /* total price with moms */
-    const total = subtotal + moms
+    // const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+    // const moms = Math.round(subtotal * 0.20) 
+    // const total = subtotal + moms
 
     const cartFooter = document.createElement('div')
     cartFooter.className = 'cart-footer'
@@ -125,7 +158,7 @@ function createCartFooter() {
 
     const totalPrice = document.createElement('h2')
     totalPrice.className = 'total-price'
-    totalPrice.textContent = `${total} SEK`
+    totalPrice.textContent = `${state.totalPrice} SEK`
 
     totalSection.appendChild(totalLabel)
     totalSection.appendChild(totalPrice)
@@ -139,8 +172,9 @@ function createCartFooter() {
     cartFooter.appendChild(totalSection)
     cartFooter.appendChild(orderBtn)
 
-    // TODO anropa en function 
-
-    return cartFooter
+    document.querySelector('.cart-footer-section').appendChild(cartFooter)
+    
+    orderBtnFunction()
+    
 }
 

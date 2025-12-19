@@ -11,7 +11,7 @@ export function initWaitingButtons() {
         receiptBtn.addEventListener('click', async () => {
             await getApiReceipt()
             renderReceipt()
-            displaySection(4)
+            displaySection(3)
             clearTimer()
         })
     }

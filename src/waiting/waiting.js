@@ -1,4 +1,5 @@
 import { state } from '../state/state.js'
+import { initWaitingButtons } from './waitingButtons.js'
 
 export function renderWaiting() {
     const waitingSection = document.querySelector('#waiting')
@@ -37,7 +38,10 @@ export function renderWaiting() {
     // Order ID
     const orderId = document.createElement('p')
     orderId.className = 'waiting-order-id'
-    orderId.textContent = `#${state.orderId.toUpperCase()}`
+    // orderId.textContent = `#${state.orderId.toUpperCase()}`
+    orderId.textContent = state.orderId
+    ? `#${state.orderId.toUpperCase()}`
+    : '#----'
     
     // Receipt button
     const receiptBtn = document.createElement('button')
@@ -60,29 +64,41 @@ export function renderWaiting() {
     
     waitingSection.appendChild(waitingContainer)
 
+    
+
     setTimer()
+    initWaitingButtons()
+    
 }
+
+
 
 let timerTracker = null
 let seconds = 0
 
 
-// timer ( hjälp av andreas )
+
 function setTimer() {
-    const eta = document.querySelector('.waiting-eta')
-    const timeLeftMiliseconds = state.eta-state.timestamp
-    seconds = Math.floor(timeLeftMiliseconds / 1000)
-    
-    if (timerTracker) {
-        clearInterval(timerTracker)
-    } 
+    const etaEl = document.querySelector('.waiting-eta')
+
+    if (!state.eta || !state.timestamp) {
+        etaEl.textContent = 'ETA OKÄND'
+        return
+    }
+
+    let seconds = Math.floor((state.eta - state.timestamp) / 1000)
+
+    if (timerTracker) clearInterval(timerTracker)
+
     timerTracker = setInterval(() => {
-        const minutes = Math.floor(seconds / 60)
-        if( seconds >= 0 ){
-            eta.textContent = `ETA ${minutes} MIN`
-        }else {
-            eta.textContent = `DIN MAT ÄR KLAR!`
+        if (seconds <= 0) {
+            etaEl.textContent = 'DIN MAT ÄR KLAR!'
+            clearInterval(timerTracker)
+            return
         }
+
+        const minutes = Math.ceil(seconds / 60)
+        etaEl.textContent = `ETA ${minutes} MIN`
         seconds--
     }, 1000)
 }

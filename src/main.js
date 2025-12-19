@@ -9,7 +9,6 @@ import { renderMenu } from './menu/DOMmenu.js'
 import { renderCart } from './cart/cart.js'
 
 async function init() {
-    console.log('API KEY:', state.apiKey)
 
     await getApiKey()
     await getApiTenant()
