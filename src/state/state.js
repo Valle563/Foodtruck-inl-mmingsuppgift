@@ -28,3 +28,14 @@ export function updateTotalPrice() {
 }
 
 
+export function resetOrder() {
+    state.cart = []
+    state.order = []
+    state.receipt = []
+    state.receiptItems = []
+    state.totalPrice = 0
+    state.orderId = ''
+    state.receiptId = ''
+    state.timestamp = ''
+    state.eta = ''
+}
