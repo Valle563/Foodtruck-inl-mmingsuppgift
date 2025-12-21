@@ -27,24 +27,6 @@ export function renderCart() {
     cartFooterSection.classList.add('cart-footer-section')
     cartSection.append(cartIconContainer, cartItemSection, cartFooterSection)
     
-    
-
-
-    // TODO lägg en eventlistnener på cartBtn 
-    // TODO gör till en egen function 
-    // if (state.cart.length > 0) {
-    //     state.cart.forEach(item => {
-    //         const cartItem = createCartItem(item)
-    //         cartSection.appendChild(cartItem)
-    //     })
-    //     const cartFooter = createCartFooter()
-    //     cartSection.appendChild(cartFooter)
-    // } else {
-    //     const emptyMsg = document.createElement('p')
-    //     emptyMsg.className = 'empty-cart'
-    //     emptyMsg.textContent = 'Din varukorg är tom'
-    //     cartSection.appendChild(emptyMsg)
-    // }
     backToMenuBtn()
     createCartFooter()
 }

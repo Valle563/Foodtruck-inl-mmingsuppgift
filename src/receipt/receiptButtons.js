@@ -1,14 +1,24 @@
-import { state } from '../state/state.js'
+import { resetOrder } from '../state/state.js'
 import { displaySection } from '../display.js'
+import { renderMenu } from '../menu/DOMmenu.js'
+import { renderCart } from '../cart/cart.js'
 
 export function initReceiptButtons() {
-    // New order button
     const newOrderBtn = document.querySelector('#receipt-new-order-btn')
-    if (newOrderBtn) {
-        newOrderBtn.addEventListener('click', () => {
-            state.cart = []
-            state.order = []
-            displaySection(0)
-        })
-    }
+    if (!newOrderBtn) return
+
+    newOrderBtn.addEventListener('click', () => {
+        // Nollställ ALL orderdata
+        resetOrder()
+
+        // Töm kvitto-DOM helt
+        document.querySelector('#receipt').innerHTML = ''
+
+        // Visa menyn
+        displaySection(0)
+
+        // Rendera om UI från tom state
+        renderMenu()
+        renderCart()
+    })
 }
